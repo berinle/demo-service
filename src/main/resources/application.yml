@@ -1,0 +1,15 @@
+server:
+  port: 9000
+
+logging:
+  level:
+    org.springframework.cloud.consul: DEBUG
+
+---
+spring:
+  profiles: docker, development
+  cloud:
+    consul:
+#      host: ${consul:localhost}
+      host: consul-dev
+      port: ${CONSUL_PORT:8500}

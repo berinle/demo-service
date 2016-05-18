@@ -1,0 +1,26 @@
+version: '2'
+
+services:
+  consul:
+    image: progrium/consul
+    volumes:
+      - /data
+      - /config
+    ports:
+      - "8300:8300"
+      - "8400:8400"
+      - "8500:8500"
+      - "8600:8600"
+    command: -server -bootstrap -data-dir /data -ui-dir /ui
+    hostname: consul-dev
+    domainname: consul-dev.me.foo
+
+  demo-service:
+    build: .
+#    image: anapsix/alpine-java
+    command: sh -c 'touch /app.jar'
+    entrypoint: java -Djava.security.egd=file://dev/./urandom -jar /app.jar
+    ports:
+      - "8080:8080"
+    links:
+      - consul
