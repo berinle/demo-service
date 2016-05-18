@@ -7,9 +7,9 @@ logging:
 
 ---
 spring:
-  profiles: docker, development
+#  profiles: docker, development
   cloud:
     consul:
-#      host: ${consul:localhost}
-      host: consul-dev
+      host: ${CONSUL_PORT:localhost}
+#      host: consul-dev
       port: ${CONSUL_PORT:8500}
